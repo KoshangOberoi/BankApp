@@ -1,0 +1,32 @@
+<div class="section add-bg">
+  <div class="container">
+    <div class="row full-height justify-content-center">
+      <div class="col-12 text-center align-self-center py-5">
+        <div class="section pb-5 pt-5 pt-sm-2 text-center">
+          <div class="card-3d-wrap mx-auto">
+            <div class="card-3d-wrapper">
+              <div class="card-front">
+                <div class="center-wrap">
+                  <div class="section text-center">
+                    <h4 class="text-white mb-4 pb-3">Enter KYC Details</h4>
+                    <div class="form-group">
+                      <input #aadhar type="text" name="aadhar" class="form-style" placeholder="Your Aadhar Number" id="aadhar"
+                        autocomplete="off">
+                      <i class="input-icon uil uil-user"></i>
+                    </div>
+                    <div class="form-group mt-2">
+                      <input #pan type="text" name="panCard" class="form-style" placeholder="Your Pan Card Number" id="panCard"
+                        autocomplete="off">
+                      <i class="input-icon uil uil-at"></i>
+                    </div>
+                    <a class="btn mt-4" (click)="updateStatus(aadhar.value, pan.value)">submit</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

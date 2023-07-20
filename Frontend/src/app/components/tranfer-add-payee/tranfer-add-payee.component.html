@@ -1,0 +1,39 @@
+	<div class="section full-height add-bg">
+    <div class="container">
+      <app-navbar></app-navbar>
+      <div class="row full-height justify-content-center">
+        <div class="col-12 text-center align-self-center py-5">
+          <div class="section pb-5 pt-5 pt-sm-2 text-center">
+            <div class="card-3d-wrap mx-auto">
+              <div class="card-3d-wrapper">
+                <div class="card-front">
+                  <div class="center-wrap">
+                    <div class="section text-center">
+                      <h4 class="text-white mb-4 pb-3">Enter Payee Details</h4>
+                      <div class="form-group">
+                        <input #cName type="text" name="cName" class="form-style" placeholder="Enter Customer Name" id="cName"
+                          autocomplete="off">
+                        <i class="input-icon uil uil-user"></i>
+                      </div>
+                      <div class="form-group mt-2">
+                        <input #bankAcc type="text" name="bankAcc" class="form-style" placeholder="Enter Account No." id="bankAcc"
+                          autocomplete="off">
+                        <i class="input-icon uil uil-at"></i>
+                      </div>
+                      <div class="form-group mt-2" id="ifsc">
+                        <input #ifsc type="text" name="ifsc" class="form-style" placeholder="Enter IFSC code" id="ifsc"
+                          autocomplete="off" >
+                        <i class="input-icon uil uil-at" ></i>
+                        <button ngDefaultControl class="btn mt-4" (click)="validate(ifsc.value)" [(ngModel)]="valid">Verify</button>
+                      </div>
+                      <a *ngIf="valid" class="btn mt-4" (click)="addPayee(cName.value, bankAcc.value)">submit</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+	</div>

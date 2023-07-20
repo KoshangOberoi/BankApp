@@ -1,0 +1,15 @@
+[
+  {
+    "custId": 1,
+    "custEmail": "kos@dos.com",
+    "name": "Kos da dos",
+    "address": "one piece",
+    "bal": 0.0,
+    "CIBILscore": 650,
+    "aadhar": "",
+    "pan": "",
+    "kycStatus": 0,
+    "username": "kosDaDos",
+    "password": "1234"
+  }
+]

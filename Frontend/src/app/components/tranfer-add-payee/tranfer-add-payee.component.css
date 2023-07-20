@@ -1,0 +1,8 @@
+#ifsc{
+  display: inline-flex !important;
+}
+
+#ifsc .btn{
+  width: 200px;
+  margin-top: 0 !important;
+}
