@@ -18,12 +18,12 @@
                       <div class="form-group mt-2">
                         <input #bankAcc type="text" name="bankAcc" class="form-style" placeholder="Enter Account No." id="bankAcc"
                           autocomplete="off">
-                        <i class="input-icon uil uil-at"></i>
+                        <i class="input-icon uil uil-entry"></i>
                       </div>
                       <div class="form-group mt-2" id="ifsc">
                         <input #ifsc type="text" name="ifsc" class="form-style" placeholder="Enter IFSC code" id="ifsc"
                           autocomplete="off" >
-                        <i class="input-icon uil uil-at" ></i>
+                        <i class="input-icon uil uil-entry" ></i>
                         <button ngDefaultControl class="btn mt-4" (click)="validate(ifsc.value)" [(ngModel)]="valid">Verify</button>
                       </div>
                       <a *ngIf="valid" class="btn mt-4" (click)="addPayee(cName.value, bankAcc.value)">submit</a>
