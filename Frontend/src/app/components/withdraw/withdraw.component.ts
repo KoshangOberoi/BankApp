@@ -25,7 +25,8 @@ export class WithdrawComponent implements OnInit{
   }
   currentCustomer : Customer = {
     custId: 0,
-    bal: 0
+    bal: 0,
+    pri_bal: 0
   };
 
   constructor(private customerService: CustomerService, private transactionService: TransactionService, private router: Router, private route: ActivatedRoute){
@@ -38,6 +39,24 @@ export class WithdrawComponent implements OnInit{
         this.currentCustomer = data;
         this.customerService.withdraw(this.currentCustomer.custId, parseFloat(amt)).subscribe(
           response => {
+            if(parseInt(localStorage.getItem('count') as string) >= 5){
+              data.bal = (data.bal as number) - 1.02*parseFloat(amt);
+              console.log(localStorage.getItem('count'));
+              if(data.bal < 0){
+                this.customerService.update(this.currentCustomer.custId, this.currentCustomer);
+              }
+              else{
+                data.pri_bal = (data.pri_bal as number) - parseFloat(amt);
+                this.customerService.update(this.currentCustomer.custId, data).subscribe(
+                  response =>{
+                    console.log(response);
+                  },
+                  error =>{
+                    console.log(error);
+                  }
+                );
+              }
+            }
             this.trans.custId = data.custId;
             this.trans.account = data.bankAcc;
             this.trans.operation = "WITHDRAW";

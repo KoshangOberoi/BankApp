@@ -4,6 +4,7 @@
 @import url('https://unicons.iconscout.com/release/v2.1.9/css/unicons.css');
 body{
   font-family: 'Poppins', sans-serif;
+  height: 100vh;
 	font-size: 16px;
 	line-height: 24px;
 	font-weight: 400;
@@ -13,7 +14,7 @@ body{
 	background-repeat: repeat;
 	background-size: 7%;
 	background-color: #fff;
-	overflow-x: hidden;
+	overflow: hidden;
   transition: all 200ms linear;
 
 }
@@ -821,4 +822,6 @@ h6 span{
   background-position: center;
 	background-repeat: repeat;
 	background-size: 7%;
+	width: 100%;
+	overflow: auto;
 }

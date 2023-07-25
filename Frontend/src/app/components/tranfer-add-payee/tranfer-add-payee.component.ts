@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Customer } from 'src/app/models/cusotmer.model';
 import { CustomerService } from 'src/app/services/customer.service';
 import { Router } from '@angular/router';
+import { error } from 'jquery';
 
 
 
@@ -29,7 +30,10 @@ export class TranferAddPayeeComponent implements OnInit{
     this.valid = false;
   }
   validate(ifsc: String){
-    if(ifsc.length<4 || !this.Bank.has(ifsc.substring(0,4)))return;
+    if(ifsc.length<4 || !this.Bank.has(ifsc.toUpperCase().substring(0,4))){
+      alert("Invalid IFSC");
+      return;
+    }
     this.valid=true;
   }
   addPayee(name: any, acc: any){
@@ -37,9 +41,27 @@ export class TranferAddPayeeComponent implements OnInit{
     this.customerService.getByEmail(this.sessionId).subscribe(
       data =>{
         this.currentCustomer = data;
-        this.customerService.addPayee(acc, this.currentCustomer.custId).subscribe(
-          response => {
-            console.log(response);
+        this.customerService.getByAcc(acc.toUpperCase()).subscribe(
+          data =>{
+            if(data.name?.toUpperCase() != name.toUpperCase()){
+              alert("Payee name dosen't match with the holders name");
+            }
+            else{
+              this.customerService.addPayee(acc, this.currentCustomer.custId).subscribe(
+                response => {
+                  this.valid = false;
+                  alert("Payee added successfully");
+                  console.log(response);
+                },
+                error => {
+                  this.valid = false;
+                  alert("Can't add payee!");
+                }
+              )
+            }
+          },
+          error =>{
+            alert("Account doesn't exist!");
           }
         )
         console.log(this.currentCustomer);

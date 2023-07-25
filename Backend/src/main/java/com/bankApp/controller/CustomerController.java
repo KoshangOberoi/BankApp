@@ -174,7 +174,7 @@ public class CustomerController {
 		if (cust != null) {
 			return new ResponseEntity<Customer>(cust, HttpStatus.OK);
 		} else {
-			return new ResponseEntity("Sorry! CustomerId not found!", 
+			return new ResponseEntity("Sorry! CustomerId not found or payee already exist!", 
 					HttpStatus.NOT_FOUND);
 		}
 	}

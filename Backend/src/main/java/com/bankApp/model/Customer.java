@@ -24,6 +24,8 @@ public class Customer {
 	private String address;
 	@Column(name = "bal")
 	private float bal;
+	@Column(name= "pri_bal")
+	private float pri_bal;
 	@Column(name = "CIBILscore")
 	private int CIBILscore;
 	@Column(name = "aadhar")
@@ -39,14 +41,17 @@ public class Customer {
 	@Column(name = "payee")
     @Type(type = "com.bankApp.customType.CustomLongArrayType")
 	private Long[] payee;
-	public Customer(Long custId, String custEmail, String name, String address, float bal, int cIBILscore,
-			String aadhar, String pan, Integer kycStatus, String password, String bankAcc, Long[] payee) {
+
+	public Customer(Long custId, String custEmail, String name, String address, float bal, float pri_bal,
+			int cIBILscore, String aadhar, String pan, Integer kycStatus, String password, String bankAcc,
+			Long[] payee) {
 		super();
 		this.custId = custId;
 		this.custEmail = custEmail;
 		this.name = name;
 		this.address = address;
 		this.bal = bal;
+		this.pri_bal = pri_bal;
 		CIBILscore = cIBILscore;
 		this.aadhar = aadhar;
 		this.pan = pan;
@@ -55,20 +60,15 @@ public class Customer {
 		this.bankAcc = bankAcc;
 		this.payee = payee;
 	}
-//	public Customer(Long custId, String custEmail, String name, String address, float bal, int cIBILscore,
-//			String aadhar, String pan, Integer kycStatus, String password) {
-//		super();
-//		this.custId = custId;
-//		this.custEmail = custEmail;
-//		this.name = name;
-//		this.address = address;
-//		this.bal = bal;
-//		CIBILscore = cIBILscore;
-//		this.aadhar = aadhar;
-//		this.pan = pan;
-//		this.kycStatus = kycStatus;
-//		this.password = password;
-//	}
+
+	public float getPri_bal() {
+		return pri_bal;
+	}
+
+	public void setPri_bal(float pri_bal) {
+		this.pri_bal = pri_bal;
+	}
+
 	public Customer() {
 		super();
 	}

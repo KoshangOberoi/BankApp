@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { error } from 'jquery';
 import { Transaction } from 'src/app/models/transaction.model';
 import { CustomerService } from 'src/app/services/customer.service';
 import { TransactionService } from 'src/app/services/transaction.service';

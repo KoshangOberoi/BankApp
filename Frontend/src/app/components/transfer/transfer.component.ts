@@ -71,6 +71,7 @@ export class TransferComponent implements OnInit {
                         console.log(error);
                       }
                     )
+                    alert("Money transferred successfully");
                     this.router.navigate(['/dashboard/' + this.sessionId]);
                   },
                   error => {

@@ -22,7 +22,7 @@ import org.hibernate.query.Query;
 public class CustomerDaoImpl implements ICustomerDao{
 	@Autowired
 	private CustomerRepository customerRepo;
-
+	
 	public List<Customer> getAllCustomers() {
 		// TODO Auto-generated method stub
 		List<Customer> customers = new ArrayList<Customer>();
@@ -66,6 +66,9 @@ public class CustomerDaoImpl implements ICustomerDao{
 			if(c.getBal() != 0.0f) {
 				_customer.setBal(c.getBal());
 			}
+			if(c.getPri_bal() != 0.0f) {
+				_customer.setPri_bal(c.getPri_bal());
+			}
 			if(c.getCIBILscore() != 0) {
 				_customer.setCIBILscore(c.getCIBILscore());
 			}
@@ -91,7 +94,8 @@ public class CustomerDaoImpl implements ICustomerDao{
 		// TODO Auto-generated method stub
 		Optional<Customer> customerData = customerRepo.findById(CustomerId);
 		Customer c = customerData.get();
-		if(c!=null && c.getBal() > amt && customerData.isPresent()) {
+		if(c!=null && c.getBal() >= amt && customerData.isPresent()) {
+			c.setPri_bal(c.getPri_bal()-amt);
 			c.setBal(c.getBal()-amt);
 			c.setCIBILscore(c.getCIBILscore()-5);
 			c.setName(c.getName());
@@ -107,6 +111,7 @@ public class CustomerDaoImpl implements ICustomerDao{
 		Optional<Customer> customerData = customerRepo.findById(CustomerId);
 		Customer c = customerData.get();
 		if(c!=null && customerData.isPresent()) {
+			c.setPri_bal(c.getPri_bal()+amt);
 			c.setBal(c.getBal()+amt);
 			c.setCIBILscore(c.getCIBILscore()+10);
 			c.setName(c.getName());
@@ -125,7 +130,7 @@ public class CustomerDaoImpl implements ICustomerDao{
 	}
 	
 	public void addCustomer(Customer c) {
-		customerRepo.save(new Customer(c.getCustId(), c.getCustEmail(), c.getName(), c.getAddress(), c.getBal(), c.getCIBILscore(), c.getAadhar(), c.getPan(), c.getKycStatus(), c.getPassword(), c.getBankAcc(), c.getPayee()));
+		customerRepo.save(new Customer(c.getCustId(), c.getCustEmail(), c.getName(), c.getAddress(), c.getBal(), c.getPri_bal() , c.getCIBILscore(), c.getAadhar(), c.getPan(), c.getKycStatus(), c.getPassword(), c.getBankAcc(), c.getPayee()));
 		return;
 	}
 	
@@ -166,6 +171,9 @@ public class CustomerDaoImpl implements ICustomerDao{
 			c.setPayee(new Long[] {payee.get(0).getCustId()});
 		}
 		else {
+			for(Long a: c.getPayee()) {
+				if(a == payee.get(0).getCustId())return null;
+			}
 			Long[] arr = Arrays.copyOf(c.getPayee(), c.getPayee().length+1);
 			arr[c.getPayee().length] = payee.get(0).getCustId();
 			c.setPayee(arr);

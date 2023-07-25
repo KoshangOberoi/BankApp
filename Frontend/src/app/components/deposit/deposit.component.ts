@@ -28,7 +28,8 @@ export class DepositComponent implements OnInit {
   }
   currentCustomer : Customer = {
     custId: 0,
-    bal: 0
+    bal: 0,
+    pri_bal: 0
   };
   deposit(amt: string){
     this.customerService.getByEmail(this.sessionId).subscribe(
@@ -36,6 +37,20 @@ export class DepositComponent implements OnInit {
         this.currentCustomer = data;
         this.customerService.deposit(this.currentCustomer.custId, parseFloat(amt)).subscribe(
           response => {
+            if(parseInt(localStorage.getItem('count') as string) >= 5){
+              data.bal = 0.98*parseFloat(amt)+(data.bal as number);
+              data.pri_bal = parseFloat(amt) + (data.pri_bal as number);
+              console.log(localStorage.getItem('count'));
+              this.customerService.update(this.currentCustomer.custId, data).subscribe(
+                response =>{
+                  console.log(response);
+                },
+                error =>{
+                  console.log(error);
+                }
+              );
+            }
+            alert("Amount deposited successfully");
             this.trans.custId = data.custId;
             this.trans.account = data.bankAcc;
             this.trans.operation = "DEPOSIT";
@@ -49,6 +64,8 @@ export class DepositComponent implements OnInit {
                 console.log(error);
               }
             )
+            localStorage.setItem('count', (parseInt(localStorage.getItem('count') as string)+1)?.toString());
+            console.log(localStorage.getItem('count'));
             this.router.navigate(['/dashboard/'+this.sessionId]);
             console.log(response);
           },

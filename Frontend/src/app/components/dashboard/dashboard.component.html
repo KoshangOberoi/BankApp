@@ -1,25 +1,17 @@
-<div class="section full-height add-bg">
-  <div class="container">
-    <app-navbar></app-navbar>
-    <div class="row full-height justify-content-center">
-      <div class="col-12 text-center align-self-center py-5">
-        <div class="section pb-5 pt-5 pt-sm-2 text-center">
-          <div class="card-3d-wrap mx-auto">
-            <div class="card-3d-wrapper">
-              <div class="card-front">
-                <div class="center-wrap">
-                  <div class="section text-center">
-                    <h4 class="text-white mb-4 pb-1">Your Present Account Statement:</h4>
-                    <h4>Primary Balance: </h4>
-                    <h4>Actual Balance: </h4>
-                  </div>
-                </div>
-              </div>
-            </div>
+<app-navbar></app-navbar>
+
+<div class="section pb-5 pt-5 pt-sm-2 text-center">
+  <div class="card-3d-wrap mx-auto">
+    <div class="card-3d-wrapper">
+      <div class="card-front">
+        <div class="center-wrap">
+          <div class="section text-center">
+            <h4 class="text-white mb-4 pb-1">Your Present Account Statement:</h4>
+            <h4>Primary Balance: {{pb}}</h4>
+            <h4>Actual Balance: {{ab}}</h4>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-

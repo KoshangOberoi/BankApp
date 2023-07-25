@@ -11,14 +11,14 @@ import { CustomerService } from 'src/app/services/customer.service';
 })
 export class TransferManagePayeeComponent implements OnInit{
   sessionId: any;
-  payees!: Customer[];
+  payees: Customer[] = [];
   custId: any;
   hasPayees: boolean = true;
   ngOnInit(): void {
     this.customerService.getPayee(this.sessionId).subscribe(
       response => {
         this.payees = response;
-        if(this.payees == null)this.hasPayees = false;
+        this.hasPayees = this.payees.length > 0;
         console.log(this.payees);
       },
       error => {
@@ -33,11 +33,13 @@ export class TransferManagePayeeComponent implements OnInit{
 
   remove(payeeId: any){
     this.customerService.getByEmail(this.sessionId).subscribe(
-      data => {
-        this.custId = data.custId;
+      customerData => {
+        this.custId = customerData.custId;
         this.customerService.removePayee(this.custId, payeeId).subscribe(
           data => {
-            this.payees = data.payee;
+            this.payees =  this.payees.filter(payee => payee.custId !== payeeId);
+            this.hasPayees = this.payees.length > 0;
+            alert("Payee removed");
             console.log(data);
           },
           error => {

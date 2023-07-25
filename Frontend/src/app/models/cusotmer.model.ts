@@ -4,6 +4,7 @@ export class Customer {
   name?: String
   address?: String
   bal?: number
+  pri_bal?: number
   CIBILscore?: number
   aadhar?: String
   pan?: String

@@ -15,6 +15,7 @@ export class WelcomePageComponent implements OnInit{
     custEmail: '',
     password: ''
   };
+  message = '';
   status=false;
 
   ngOnInit(): void {
@@ -32,7 +33,7 @@ export class WelcomePageComponent implements OnInit{
     };
     this.customerService.register(data).subscribe(
       response => {
-        console.log(this.accNo);
+        alert("Customer registered successfully. Account No: " + this.accNo);
         console.log(response);
       },
       error => {
@@ -47,18 +48,22 @@ export class WelcomePageComponent implements OnInit{
         this.sessionId = uemail;
         if(this.currentCustomer.password == upass){
           if(this.currentCustomer.kycStatus == 1){
+            localStorage.setItem("count", "0");
+            console.log(localStorage.getItem('count'));
             this.router.navigate(['/dashboard', this.sessionId]);
           }
           else{
+            alert("Your KYC is pending... Please complete your kyc before availing our services");
             this.router.navigate(['/kyc', this.sessionId]);
           }
         }
         else{
-          console.log("incorrect password!!");
+          this.message = "incorrect email or password!!";
         }
         console.log(data);
       },
       error => {
+        this.message = "incorrect email or password!!";
         console.log(error);
       });
 

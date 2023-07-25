@@ -9,8 +9,18 @@ import { CustomerService } from 'src/app/services/customer.service';
 })
 export class DashboardComponent implements OnInit{
   sessionId: any;
+  pb: any;
+  ab: any;
   ngOnInit(): void {
-
+    this.customerService.getByEmail(this.sessionId).subscribe(
+      data =>{
+        this.pb = data.pri_bal;
+        this.ab = data.bal;
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
   constructor(private customerService: CustomerService, private route: ActivatedRoute){
